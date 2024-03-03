@@ -4,14 +4,19 @@ import axios from "axios";
 import dynamic from 'next/dynamic';
 
 interface Seeker {
-  name: string;
-  email: string;
-  phone: string;
+  jobid:number,
+  providerid:number,
+  position:string,
+  labels: string;
+  company: string;
+  location: string;
+  creationdate: string;
   status: string;
+  nbreapplicants: string;
 }
 
 const TableThree = () => {
-  const url = "http://localhost:8000/seekers";
+  const url = "http://localhost:8000/joblisting";
   const [seekers, setseekers] = useState<Seeker[]>([]);
   const [editingRow, setEditingRow] = useState<number | null>(null);
   const [editedEmail, setEditedEmail] = useState("");

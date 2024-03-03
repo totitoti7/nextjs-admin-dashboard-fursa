@@ -37,10 +37,10 @@ export async function updateUser(userName,fname,lname, email, phone, status,type
    const [rows] = await pool.query("SELECT * FROM joblisting");
    return rows;
  }
-// export async function deleteSeeker(seekerName) {
-//   const [result] = await pool.query("DELETE FROM seekers WHERE name = ?", [seekerName]);
-//   return result;
-// }
+ export async function deleteJoblisting(seekerName) {
+   const [result] = await pool.query("DELETE FROM joblisting WHERE jobid = ?", [seekerName]);
+   return result;
+ }
  export async function updateJoblisting(seekerName, position, labels, company,creationdate, status, nbreapplicants) {
    const [result] = await pool.query("UPDATE joblisting SET  position=?, labels=?, company=?, creationdate=?, status=?, nbreapplicants=? WHERE jobid=?", [ position, labels,company,creationdate, status, nbreapplicants, seekerName]);
   return result;

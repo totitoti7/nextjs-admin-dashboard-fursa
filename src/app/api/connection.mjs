@@ -6,7 +6,7 @@ import { deleteUser } from './db.mjs';
 import { updateUser } from './db.mjs';
 import { postUser } from './db.mjs';
 import { getJoblisting } from './db.mjs';
-// import { deleteSeeker } from './db.mjs';
+import { deleteJoblisting } from './db.mjs';
 import { updateJoblisting } from './db.mjs';
 import { postJoblisting } from './db.mjs';
 // import { getOffers } from './db.mjs';
@@ -80,17 +80,17 @@ app.post('/users', async (req, res) => {
    res.json(joblisting);
  });
 
-// app.delete('/seekers/:name', async (req, res) => {
-//   const seekerName = req.params.name;
-//   try {
+app.delete('/joblisting/:jobid', async (req, res) => {
+  const seekerName = req.params.jobid;
+  try {
     
-//     await deleteSeeker(seekerName);
-//     res.status(204).send(); // Successfully deleted, send a 204 No Content status
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'Internal Server Error' });
-//   }
-// });
+    await deleteJoblisting(seekerName);
+    res.status(204).send(); // Successfully deleted, send a 204 No Content status
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
  app.put('/joblisting/:jobid', async (req, res) => {
    const seekerName = req.params.jobid;

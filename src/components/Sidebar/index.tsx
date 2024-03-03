@@ -452,7 +452,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                                 "text-white"
                               } `}
                             >
-                              Job Providers
+                              User's List
                             </Link>
                           </li>
                           
