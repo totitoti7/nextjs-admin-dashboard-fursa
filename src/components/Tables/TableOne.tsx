@@ -130,26 +130,26 @@ const handleAddUser = async () => {
         <div className="max-w-full overflow-x-auto">
         <div className="flex justify-between items-center mb-6">
   <h4 className="text-xl font-semibold text-black dark:text-white">
-    Job Location's List
+    AI Matching List
   </h4>
-  <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
+  {/* { <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
     Add New Job location
-  </button>
+  </button> } */}
 </div>
           <table className="w-full table-auto">
             <thead>
               <tr className="bg-gray-2 text-left dark:bg-meta-4">
                 <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                  Job Position
+                  Matching ID 
                 </th>
                 <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
-                  Location
+                  Job Application ID
                 </th>
                 <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                  Company
+                  Job Seeker ID
                 </th>
                 <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                  Number of Matches
+                  Matching Score
                 </th>
                 <th className="px-4 py-4 font-medium text-black dark:text-white">
                   Actions
@@ -266,7 +266,7 @@ const handleAddUser = async () => {
                     ) : (
                       <button onClick={() => handleEditClick(key)} className="hover:text-primary">
                         {/* Edit icon SVG goes here */}
-                        <svg
+                        {/* <svg
                           className="fill-current"
                           width="18"
                           height="18"
@@ -282,7 +282,7 @@ const handleAddUser = async () => {
                           d="M9 11.3906C7.67812 11.3906 6.60938 10.3219 6.60938 9C6.60938 7.67813 7.67812 6.60938 9 6.60938C10.3219 6.60938 11.3906 7.67813 11.3906 9C11.3906 10.3219 10.3219 11.3906 9 11.3906ZM9 7.875C8.38125 7.875 7.875 8.38125 7.875 9C7.875 9.61875 8.38125 10.125 9 10.125C9.61875 10.125 10.125 9.61875 10.125 9C10.125 8.38125 9.61875 7.875 9 7.875Z"
                           fill=""
                         />
-                      </svg>
+                      </svg> */}
                     </button>
                     )}
                       <button className="hover:text-primary" onClick={() => handleDeleteLocation(item.idl)}>

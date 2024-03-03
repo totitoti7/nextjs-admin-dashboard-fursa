@@ -8,12 +8,12 @@ const pool = mysql.createPool({
     database: 'fursadash',
 }).promise()
 
-export default async function getUsers() {
-  const [rows] = await pool.query("SELECT * FROM seekers UNION SELECT * FROM providers")
-  return rows
-}
-export async function postProvider(name, email, phone, status) {
-  const [result] = await pool.query("INSERT INTO providers (name, email, phone, status) VALUES (?, ?, ?, ?)", [name, email, phone, status]);
+// export default async function getUsers() {
+//   const [rows] = await pool.query("SELECT * FROM seekers UNION SELECT * FROM providers")
+//   return rows
+// }
+export async function postProvider(name, email, phone, status, type) {
+  const [result] = await pool.query("INSERT INTO providers (name, email, phone, status, type) VALUES (?, ?, ?, ?, ?)", [name, email, phone, status, type]);
   return result;
 }
 export async function getProviders() {
@@ -24,13 +24,13 @@ export async function deleteProvider(providerName) {
   const [result] = await pool.query("DELETE FROM providers WHERE name = ?", [providerName]);
   return result;
 }
-export async function updateProvider(providerName, email, phone, status) {
-  const [result] = await pool.query("UPDATE providers SET  email=?, phone=?, status=?  WHERE name=?", [ email, phone,status, providerName]);
+export async function updateProvider(providerName, email, phone, status, type) {
+  const [result] = await pool.query("UPDATE providers SET  email=?, phone=?, status=?, type=?  WHERE name=?", [ email, phone,status,type, providerName]);
   return result;
 }
 
-export async function postSeeker(name, email, phone, status) {
-  const [result] = await pool.query("INSERT INTO seekers (name, email, phone, status) VALUES (?, ?, ?, ?)", [name, email, phone, status]);
+export async function postSeeker(name, email, phone, status, date, applicant) {
+  const [result] = await pool.query("INSERT INTO seekers (name, email, phone, status, date, applicant) VALUES (?, ?, ?, ?, ?,?)", [name, email, phone, status, date, applicant]);
   return result;
 }
 export async function getSeekers() {
@@ -41,8 +41,8 @@ export async function deleteSeeker(seekerName) {
   const [result] = await pool.query("DELETE FROM seekers WHERE name = ?", [seekerName]);
   return result;
 }
-export async function updateSeeker(seekerName, email, phone, status) {
-  const [result] = await pool.query("UPDATE seekers SET  email=?, phone=?, status=?  WHERE name=?", [ email, phone,status, seekerName]);
+export async function updateSeeker(seekerName, email, phone, status, date, applicant) {
+  const [result] = await pool.query("UPDATE seekers SET  email=?, phone=?, status=?, date=?, applicant=?  WHERE name=?", [ email, phone,status,date, applicant, seekerName]);
   return result;
 }
 
@@ -78,7 +78,7 @@ export async function postLocation(position, location, company, matches) {
   const [result] = await pool.query("INSERT INTO locations ( position, location, company, matches) VALUES (?, ?, ?, ?)", [position, location, company, matches]);
   return result;
 }
-const users = await getUsers();
+// const users = await getUsers();
 const providers = await getProviders();
 const offers = await getOffers();
 const seekers= await getSeekers();

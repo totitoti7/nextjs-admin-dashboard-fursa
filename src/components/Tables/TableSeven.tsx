@@ -8,6 +8,8 @@ interface Seeker {
   email: string;
   phone: string;
   status: string;
+  date:string;
+  applicant:string;
 }
 
 const TableThree = () => {
@@ -17,14 +19,16 @@ const TableThree = () => {
   const [editedEmail, setEditedEmail] = useState("");
   const [editedPhone, setEditedPhone] = useState("");
   const [editedStatus, setEditedStatus] = useState("");
-
+  const [editedDate, setEditedDate] = useState("");
+  const [editedApplicant, setEditedApplicant] = useState("");
    // New states for pop-up
    const [isAddUserPopupOpen, setAddUserPopupOpen] = useState(false);
    const [newUserName, setNewUserName] = useState("");
    const [newUserEmail, setNewUserEmail] = useState("");
    const [newUserPhone, setNewUserPhone] = useState("");
    const [newUserStatus, setNewUserStatus] = useState("");
-
+   const [newUserDate, setNewUserDate] = useState("");
+   const [newUserApplicant, setNewUserApplicant] = useState("");
   useEffect(() => {
   axios
   .get(url)
@@ -53,6 +57,8 @@ const TableThree = () => {
     setEditedEmail(seekers[index].email);
     setEditedPhone(seekers[index].phone);
     setEditedStatus(seekers[index].status);
+    setEditedDate(seekers[index].date);
+    setEditedApplicant(seekers[index].applicant);
   };
 
   const handleSaveClick = async (index: number) => {
@@ -64,6 +70,8 @@ const TableThree = () => {
         email: editedEmail,
         phone: editedPhone,
         status: editedStatus,
+        date: editedDate,
+        applicant: editedApplicant,
       });
   
       // Update the local state with the edited values
@@ -76,6 +84,8 @@ const TableThree = () => {
                 email: editedEmail,
                 phone: editedPhone,
                 status: editedStatus,
+                date: editedDate,
+                applicant: editedApplicant,
               }
             : seeker
         )
@@ -100,6 +110,8 @@ const handleClosePopup = () => {
   setNewUserEmail("");
   setNewUserPhone("");
   setNewUserStatus("");
+  setNewUserDate("");
+  setNewUserApplicant("");
 };
 
 // Function to handle adding a new user
@@ -111,6 +123,8 @@ const handleAddUser = async () => {
       email: newUserEmail,
       phone: newUserPhone,
       status: newUserStatus,
+      date: newUserDate,
+      applicant: newUserApplicant,
     });
     
     // Refresh the list of providers
@@ -130,26 +144,32 @@ const handleAddUser = async () => {
       <div className="max-w-full overflow-x-auto">
       <div className="flex justify-between items-center mb-6">
   <h4 className="text-xl font-semibold text-black dark:text-white">
-    Job Seekers' List
+    Job Listing
   </h4>
   <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
-    Add New Job Seeker
+    Add New Job offer
   </button>
 </div>
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                Name
+                Position Title
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
-                Email
+                Company
               </th>
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                Phone Number
+                Location
               </th>
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                 Status
+              </th>
+              <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                Posted Date
+              </th>
+              <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                Number of Applicants
               </th>
               <th className="px-4 py-4 font-medium text-black dark:text-white">
                 Actions
@@ -195,15 +215,15 @@ const handleAddUser = async () => {
       value={editedStatus}
       onChange={(e) => setEditedStatus(e.target.value)}
     >
-      <option value="Active">Active</option>
-      <option value="Unactive">Unactive</option>
+      <option value="Open">Open</option>
+      <option value="Close">Close</option>
     </select>
   ) : (
     <p
       className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
-        item.status === "Active"
+        item.status === "Open"
           ? "bg-success text-success"
-          : item.status === "Unactive"
+          : item.status === "Close"
           ? "bg-danger text-danger"
           : "bg-warning text-warning"
       }`}
@@ -212,12 +232,34 @@ const handleAddUser = async () => {
     </p>
   )}
 </td>
+<td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
+        {editingRow === key ? (
+          <input
+            type="text"
+            value={editedDate}
+            onChange={(e) => setEditedDate(e.target.value)}
+          />
+        ) : (
+          <h5 className="font-medium text-black dark:text-white">{item.date}</h5>
+        )}
+      </td>
+      <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
+        {editingRow === key ? (
+          <input
+            type="text"
+            value={editedApplicant}
+            onChange={(e) => setEditedApplicant(e.target.value)}
+          />
+        ) : (
+          <h5 className="font-medium text-black dark:text-white">{item.applicant}</h5>
+        )}
+      </td>
 {isAddUserPopupOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center" >
             <div className="bg-white p-6 rounded-md shadow-md">
-              <h2 className="text-lg font-semibold mb-4">Add New User</h2>
+              <h2 className="text-lg font-semibold mb-4">Add New Job offer</h2>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Name</label>
+                <label className="block text-sm font-medium text-gray-700">Position</label>
                 <input
                   type="text"
                   value={newUserName}
@@ -226,7 +268,7 @@ const handleAddUser = async () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <label className="block text-sm font-medium text-gray-700">Company</label>
                 <input
                   type="text"
                   value={newUserEmail}
@@ -235,7 +277,7 @@ const handleAddUser = async () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Phone</label>
+                <label className="block text-sm font-medium text-gray-700">Location</label>
                 <input
                   type="text"
                   value={newUserPhone}
@@ -251,16 +293,34 @@ const handleAddUser = async () => {
     className="border p-2 w-full"
   >
     <option value="">Select Status</option>
-    <option value="Active">Active</option>
-    <option value="Unactive">Unactive</option>
+    <option value="Open">Open</option>
+    <option value="Close">Close</option>
   </select>
 </div>
+<div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Date</label>
+                <input
+                  type="text"
+                  value={newUserDate}
+                  onChange={(e) => setNewUserDate(e.target.value)}
+                  className="border p-2 w-full"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700">Number of applicants</label>
+                <input
+                  type="text"
+                  value={newUserApplicant}
+                  onChange={(e) => setNewUserApplicant(e.target.value)}
+                  className="border p-2 w-full"
+                />
+              </div>
               <div className="flex justify-end">
                 <button onClick={handleClosePopup} className="mr-2 bg-gray-300 px-4 py-2 rounded">
                   Cancel
                 </button>
                 <button onClick={handleAddUser} className="bg-primary text-white px-4 py-2 rounded">
-                  Add User
+                  Add job offer
                 </button>
               </div>
             </div>

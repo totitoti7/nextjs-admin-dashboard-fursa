@@ -13,7 +13,7 @@ const ECommerce: React.FC = () => {
     <>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
         
-        <CardDataStats title="Job Locations" total="" rate="5.6%" levelUp>
+        <CardDataStats title="AI-Matching" total="" rate="5.6%" levelUp>
         <svg
   className="fill-primary dark:fill-white"
   width="22"
@@ -23,13 +23,13 @@ const ECommerce: React.FC = () => {
   xmlns="http://www.w3.org/2000/svg"
 >
   <path
-    d="M12 0C7.58172 0 4 3.58172 4 8C4 11.8901 11.5728 21.4532 11.9994 22C12.4274 21.4532 20 11.8901 20 8C20 3.58172 16.4183 0 12 0ZM12 10C10.3431 10 9 8.65685 9 7C9 5.34315 10.3431 4 12 4C13.6569 4 15 5.34315 15 7C15 8.65685 13.6569 10 12 10Z"
+    d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM12 20C7.58172 20 4 16.4183 4 12C4 7.58172 7.58172 4 12 4C16.4183 4 20 7.58172 20 12C20 16.4183 16.4183 20 12 20ZM11 15.5C11 16.3284 11.6716 17 12.5 17C13.3284 17 14 16.3284 14 15.5C14 14.6716 13.3284 14 12.5 14C11.6716 14 11 14.6716 11 15.5Z"
     fill=""
   />
 </svg>
 
         </CardDataStats>
-        <CardDataStats title="Job Providers" total="" rate="4.35%" levelUp>
+        <CardDataStats title="Job Listing" total="" rate="4.35%" levelUp>
         <svg
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -47,7 +47,7 @@ const ECommerce: React.FC = () => {
   <line x1="16" y1="4" x2="16" y2="16" />
 </svg>
         </CardDataStats>
-        <CardDataStats title="Job Seekers" total="" rate="2.59%" levelUp>
+        <CardDataStats title="Job Applications" total="" rate="2.59%" levelUp>
         <svg
   xmlns="http://www.w3.org/2000/svg"
   width="24"
@@ -59,8 +59,10 @@ const ECommerce: React.FC = () => {
   stroke-linecap="round"
   stroke-linejoin="round"
 >
-  <circle cx="12" cy="7" r="4" />
-  <path d="M12 11v6M8 15h8" />
+  <rect x="4" y="2" width="16" height="20" rx="2" ry="2" />
+  <circle cx="12" cy="12" r="4" />
+  <line x1="12" y1="8" x2="12" y2="12" />
+  <line x1="8" y1="12" x2="16" y2="12" />
 </svg>
         </CardDataStats>
         <CardDataStats title="Total Users" total="" rate="0.95%" levelDown>

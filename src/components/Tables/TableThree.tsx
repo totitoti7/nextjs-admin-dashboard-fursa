@@ -127,23 +127,23 @@ const handleAddUser = async () => {
       <div className="max-w-full overflow-x-auto">
       <div className="flex justify-between items-center mb-6">
   <h4 className="text-xl font-semibold text-black dark:text-white">
-    Job Offers' List
+    Job Application's List
   </h4>
   <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
-    Add New Job Offer
+    Add New Job application
   </button>
 </div>
         <table className="w-full table-auto">
           <thead>
             <tr className="bg-gray-2 text-left dark:bg-meta-4">
               <th className="min-w-[220px] px-4 py-4 font-medium text-black dark:text-white xl:pl-11">
-                Company 
+                Application ID
               </th>
               <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
-                Creation date
+                Application date
               </th>
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                Category
+                Seeker ID
               </th>
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                 Status
@@ -174,15 +174,9 @@ const handleAddUser = async () => {
         )}
       </td>
       <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
-        {editingRow === key ? (
-          <input
-            type="text"
-            value={editedCategory}
-            onChange={(e) => setEditedCategory(e.target.value)}
-          />
-        ) : (
-          <h5 className="font-medium text-black dark:text-white">{item.category}</h5>
-        )}
+      <h5 className="font-medium text-black dark:text-white">
+                    {item.category}
+                  </h5>
       </td>
                 
       <td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
@@ -191,15 +185,15 @@ const handleAddUser = async () => {
       value={editedStatus}
       onChange={(e) => setEditedStatus(e.target.value)}
     >
-      <option value="Posted">Posted</option>
-      <option value="Retreived">Retreived</option>
+      <option value="Accepted">Accepted</option>
+      <option value="Rejected">Rejected</option>
     </select>
   ) : (
     <p
       className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
-        item.status === "Posted"
+        item.status === "Accepted"
           ? "bg-success text-success"
-          : item.status === "Retreived"
+          : item.status === "Rejected"
           ? "bg-danger text-danger"
           : "bg-warning text-warning"
       }`}
@@ -211,9 +205,9 @@ const handleAddUser = async () => {
 {isAddUserPopupOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center" >
             <div className="bg-white p-6 rounded-md shadow-md">
-              <h2 className="text-lg font-semibold mb-4">Add New User</h2>
+              <h2 className="text-lg font-semibold mb-4">Add New Job application</h2>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Company Name</label>
+                <label className="block text-sm font-medium text-gray-700">ApplicationID</label>
                 <input
                   type="text"
                   value={newUserName}
@@ -222,7 +216,7 @@ const handleAddUser = async () => {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-sm font-medium text-gray-700">Category</label>
+                <label className="block text-sm font-medium text-gray-700">SeekerID</label>
                 <input
                   type="text"
                   value={newUserCategory}
@@ -247,8 +241,8 @@ const handleAddUser = async () => {
     className="border p-2 w-full"
   >
     <option value="">Select Status</option>
-    <option value="Posted">Posted</option>
-    <option value="Retreived">Retreived</option>
+    <option value="Accepted">Accepted</option>
+    <option value="Rejected">Rejected</option>
   </select>
 </div>
               <div className="flex justify-end">
@@ -256,7 +250,7 @@ const handleAddUser = async () => {
                   Cancel
                 </button>
                 <button onClick={handleAddUser} className="bg-primary text-white px-4 py-2 rounded">
-                  Add User
+                  Add application
                 </button>
               </div>
             </div>

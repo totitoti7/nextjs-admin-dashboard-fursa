@@ -1,6 +1,6 @@
 import cors from 'cors';
 import express from 'express';
-import getUsers from './db.mjs'
+// import getUsers from './db.mjs'
 import { getProviders } from './db.mjs';
 import { deleteProvider } from './db.mjs';
 import { updateProvider } from './db.mjs';
@@ -22,10 +22,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/users', async (req, res) => {
-    const users = await getUsers();
-    res.json(users);
-});
+// app.get('/users', async (req, res) => {
+//     const users = await getUsers();
+//     res.json(users);
+// });
 
 app.get('/providers', async (req, res) => {
   const providers = await getProviders();
@@ -49,9 +49,10 @@ app.put('/providers/:name', async (req, res) => {
   const phone  = req.body.phone;
   const email  = req.body.email;
   const status = req.body.status;
+  const type = req.body.type;
   try {
     
-    await updateProvider(providerName, email,phone, status);
+    await updateProvider(providerName, email,phone, status,type);
 
     res.status(200).json({ message: 'Provider updated successfully' });
   } catch (error) {
@@ -60,10 +61,10 @@ app.put('/providers/:name', async (req, res) => {
   }
 });
 app.post('/providers', async (req, res) => {
-  const { name, email, phone, status } = req.body;
+  const { name, email, phone, status,type } = req.body;
   try {
     // Call the postProvider function to add a new provider
-    await postProvider(name, email, phone, status);
+    await postProvider(name, email, phone, status, type);
     res.status(201).json({ message: 'Provider added successfully' });
   } catch (error) {
     console.error(error);
@@ -94,9 +95,11 @@ app.put('/seekers/:name', async (req, res) => {
   const phone  = req.body.phone;
   const email  = req.body.email;
   const status = req.body.status;
+  const date = req.body.date;
+  const applicant = req.body.applicant;
   try {
     
-    await updateSeeker(seekerName, email,phone, status);
+    await updateSeeker(seekerName, email,phone, status, date, applicant);
 
     res.status(200).json({ message: 'Seeker updated successfully' });
   } catch (error) {
@@ -105,10 +108,10 @@ app.put('/seekers/:name', async (req, res) => {
   }
 });
 app.post('/seekers', async (req, res) => {
-  const { name, email, phone, status } = req.body;
+  const { name, email, phone, status,date, applicant } = req.body;
   try {
     // Call the postProvider function to add a new provider
-    await postSeeker(name, email, phone, status);
+    await postSeeker(name, email, phone, status, date, applicant);
     res.status(201).json({ message: 'Seeker added successfully' });
   } catch (error) {
     console.error(error);

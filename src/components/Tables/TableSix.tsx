@@ -8,6 +8,7 @@ interface Provider {
   email: string;
   phone: string;
   status: string;
+  type:string;
 }
 
 const TableThree = () => {
@@ -17,6 +18,7 @@ const TableThree = () => {
   const [editedEmail, setEditedEmail] = useState("");
   const [editedPhone, setEditedPhone] = useState("");
   const [editedStatus, setEditedStatus] = useState("");
+  const [editedType, setEditedType] = useState("");
 
    // New states for pop-up
    const [isAddUserPopupOpen, setAddUserPopupOpen] = useState(false);
@@ -24,7 +26,7 @@ const TableThree = () => {
    const [newUserEmail, setNewUserEmail] = useState("");
    const [newUserPhone, setNewUserPhone] = useState("");
    const [newUserStatus, setNewUserStatus] = useState("");
-
+   const [newUserType, setNewUserType] = useState("");
   useEffect(() => {
   axios
   .get(url)
@@ -53,6 +55,7 @@ const TableThree = () => {
     setEditedEmail(providers[index].email);
     setEditedPhone(providers[index].phone);
     setEditedStatus(providers[index].status);
+    setEditedType(providers[index].type);
   };
 
   const handleSaveClick = async (index: number) => {
@@ -64,6 +67,7 @@ const TableThree = () => {
         email: editedEmail,
         phone: editedPhone,
         status: editedStatus,
+        type: editedType,
       });
   
       // Update the local state with the edited values
@@ -76,6 +80,7 @@ const TableThree = () => {
                 email: editedEmail,
                 phone: editedPhone,
                 status: editedStatus,
+                type: editedType,
               }
             : provider
         )
@@ -100,6 +105,7 @@ const handleClosePopup = () => {
   setNewUserEmail("");
   setNewUserPhone("");
   setNewUserStatus("");
+  setNewUserType("");
 };
 
 // Function to handle adding a new user
@@ -111,6 +117,7 @@ const handleAddUser = async () => {
       email: newUserEmail,
       phone: newUserPhone,
       status: newUserStatus,
+      type: newUserType,
     });
     
     // Refresh the list of providers
@@ -129,10 +136,10 @@ const handleAddUser = async () => {
       <div className="max-w-full overflow-x-auto">
       <div className="flex justify-between items-center mb-6">
   <h4 className="text-xl font-semibold text-black dark:text-white">
-    Job Providers' List
+    Users' List
   </h4>
   <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
-    Add New Job Provider
+    Add New User
   </button>
 </div>
         <table className="w-full table-auto">
@@ -149,6 +156,9 @@ const handleAddUser = async () => {
               </th>
               <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                 Status
+              </th>
+              <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
+                Type
               </th>
               <th className="px-4 py-4 font-medium text-black dark:text-white">
                 Actions
@@ -211,6 +221,29 @@ const handleAddUser = async () => {
     </p>
   )}
 </td>
+<td className="border-b border-[#eee] px-4 py-5 dark:border-strokedark">
+  {editingRow === key ? (
+    <select
+      value={editedType}
+      onChange={(e) => setEditedType(e.target.value)}
+    >
+      <option value="Provider">Provider</option>
+      <option value="Seeker">Seeker</option>
+    </select>
+  ) : (
+    <p
+      className={`inline-flex rounded-full bg-opacity-10 px-3 py-1 text-sm font-medium ${
+        item.type === "Provider"
+          ? "bg-success text-success"
+          : item.type === "Seeker"
+          ? "bg-danger text-danger"
+          : "bg-warning text-warning"
+      }`}
+    >
+      {item.type}
+    </p>
+  )}
+</td>
 {isAddUserPopupOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="bg-white p-6 rounded-md shadow-md">
@@ -252,6 +285,18 @@ const handleAddUser = async () => {
     <option value="">Select Status</option>
     <option value="Active">Active</option>
     <option value="Unactive">Unactive</option>
+  </select>
+</div>
+<div className="mb-4">
+  <label className="block text-sm font-medium text-gray-700">Type</label>
+  <select
+    value={newUserType}
+    onChange={(e) => setNewUserType(e.target.value)}
+    className="border p-2 w-full"
+  >
+    <option value="">Select Type</option>
+    <option value="Provider">Provider</option>
+    <option value="Seeker">Seeker</option>
   </select>
 </div>
               <div className="flex justify-end">
