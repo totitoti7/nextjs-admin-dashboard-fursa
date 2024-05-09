@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic';
 
 interface Location {
   applicationID:number;
-  userid: number;
-  jobid: number;
+  user_fname: string;
+  job_title: number;
   status: string;
 
 }
@@ -18,8 +18,8 @@ const TableOne = () => {
 
    // New states for pop-up
    const [isAddUserPopupOpen, setAddUserPopupOpen] = useState(false);
-   const [newUserUserid, setNewUserUserid] = useState("");
-   const [newUserJobid, setNewUserJobid] = useState("");
+   const [newUseruser_fname, setNewUseruser_fname] = useState("");
+   const [newUserjob_title, setNewUserjob_title] = useState("");
    const [newUserStatus, setNewUserStatus] = useState("");
    
 
@@ -86,8 +86,8 @@ const handleOpenPopup = () => {
 const handleClosePopup = () => {
   setAddUserPopupOpen(false);
   // Reset input fields when closing the pop-up
-  setNewUserUserid("");
-  setNewUserJobid("");
+  setNewUseruser_fname("");
+  setNewUserjob_title("");
   setNewUserStatus("");
 };
 
@@ -96,8 +96,8 @@ const handleAddUser = async () => {
   try {
     // Make a POST request to add a new user to the server
     await axios.post("http://localhost:8000/application", {
-      userid: newUserUserid,
-      jobid: newUserJobid,
+      user_fname: newUseruser_fname,
+      job_title: newUserjob_title,
       status: newUserStatus
     });
     
@@ -118,9 +118,7 @@ const handleAddUser = async () => {
   <h4 className="text-xl font-semibold text-black dark:text-white">
     Application's Summury List
   </h4>
-  <button onClick={handleOpenPopup} className="bg-primary text-white px-4 py-2 rounded">
-    Add New Application
-  </button>
+
 </div>
           <table className="w-full table-auto">
             <thead>
@@ -129,10 +127,10 @@ const handleAddUser = async () => {
                   Application ID
                 </th>
                 <th className="min-w-[150px] px-4 py-4 font-medium text-black dark:text-white">
-                  User ID
+                  User First Name
                 </th>
                 <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
-                  Job ID
+                  Job title
                 </th>
                 <th className="min-w-[120px] px-4 py-4 font-medium text-black dark:text-white">
                   Status
@@ -153,13 +151,13 @@ const handleAddUser = async () => {
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {item.userid}
+                    {item.user_fname}
                   </h5>
                   
                 </td>
                 <td className="border-b border-[#eee] px-4 py-5 pl-9 dark:border-strokedark xl:pl-11">
                   <h5 className="font-medium text-black dark:text-white">
-                    {item.jobid}
+                    {item.job_title}
                   </h5>
                   
                 </td>
@@ -197,8 +195,8 @@ const handleAddUser = async () => {
                 <label className="block text-sm font-medium text-gray-700">User ID</label>
                 <input
                   type="text"
-                  value={newUserUserid}
-                  onChange={(e) => setNewUserUserid(e.target.value)}
+                  value={newUseruser_fname}
+                  onChange={(e) => setNewUseruser_fname(e.target.value)}
                   className="border p-2 w-full"
                 />
               </div>
@@ -206,8 +204,8 @@ const handleAddUser = async () => {
                 <label className="block text-sm font-medium text-gray-700">Job ID</label>
                 <input
                   type="text"
-                  value={newUserJobid}
-                  onChange={(e) => setNewUserJobid(e.target.value)}
+                  value={newUserjob_title}
+                  onChange={(e) => setNewUserjob_title(e.target.value)}
                   className="border p-2 w-full"
                 />
               </div>

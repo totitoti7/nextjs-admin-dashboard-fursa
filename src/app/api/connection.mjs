@@ -189,6 +189,7 @@ app.get('/application', async (req, res) => {
   const application = await getApp();
   res.json(application);
 });
+
 app.get('/application/summary', async (req, res) => {
   const application = await getApplication();
   res.json(application);

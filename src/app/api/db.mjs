@@ -73,9 +73,25 @@ export async function updateUser(userName,fname,lname,age, email, phone, city, l
 //   return result;
 // }
 export async function getApp() {
-     const [rows] = await pool.query("SELECT * FROM application");
-     return rows;
-   }
+  const query = `
+    SELECT 
+      app.applicationID,
+      users.fname AS user_fname,
+      job.title AS job_title,
+      app.status,
+      app.created_at
+    FROM 
+      application AS app
+    INNER JOIN 
+      users ON app.userid = users.userid
+    INNER JOIN 
+      joblisting AS job ON app.jobid = job.jobid
+  `;
+  
+  const [rows] = await pool.query(query);
+  return rows;
+}
+
 export async function getApplication() {
   try {
     const [rows] = await pool.query("SELECT userid, GROUP_CONCAT(jobid) AS job_application_id FROM application GROUP BY userid");
